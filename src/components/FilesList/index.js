@@ -8,6 +8,7 @@ import { fileDataType } from '../../store/action/fileinfo';
 import {getFileInfo,deleteFIle} from '../../store/action/fileinfo'
 import {store} from '../../store/store'
 import {baseurl} from '../../api/baseurl'
+import {createPdfchangeurlAction} from '../../store/action/pdfviewer'
 const { confirm } = Modal;
 
 function showConfirm(key,path) {
@@ -129,6 +130,25 @@ class FileList extends Component {
           >
             <Table columns={columns} 
             dataSource={this.props.fileinfo} 
+            onRow={record => {
+              return {
+                onDoubleClick: event => {
+                  console.log(record)
+                  if(record.tags==="pdf"){
+                    console.log(record.path)
+                    const pathstr = record.path;
+                    const index = pathstr.lastIndexOf("/");
+                    console.log(pathstr[index])
+                    let path = pathstr.substring(index);
+                    store.dispatch(createPdfchangeurlAction(path));
+                  }
+                }, // 点击行
+                onClick: event => {},
+                onContextMenu: event => {},
+                onMouseEnter: event => {}, // 鼠标移入行
+                onMouseLeave: event => {},
+              };
+            }}
             />
           </Spin>
         )
@@ -148,6 +168,9 @@ function mapDispatchToProps(dispatch){
     },
     deleteFIle(key,path){
       dispatch(deleteFIle(key,path))
+    },
+    changePDFUrl(url){
+      dispatch(createPdfchangeurlAction(url));
     }
   }
 }

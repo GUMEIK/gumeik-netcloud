@@ -5,6 +5,7 @@ import {store} from './store/store'
 import './store/store'
 import {Provider} from 'react-redux'
 import PdfViewer from './components/modal'
+import LiveChat from './components/livechat'
 export default class App extends Component {
   render() {
     return (
@@ -12,6 +13,7 @@ export default class App extends Component {
         <PdfViewer/>
         <Upload></Upload>
         <FIleList/>
+        <LiveChat/>
       </Provider>
     )
   }

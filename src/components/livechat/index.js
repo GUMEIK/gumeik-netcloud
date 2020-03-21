@@ -20,6 +20,8 @@ export default class LIveChat extends React.Component {
 
   render() {
       const height = document.documentElement.clientHeight;
+      const width = document.documentElement.clientWidth;
+      console.log(width)
     return (
       <div>
         <Button 
@@ -33,7 +35,7 @@ export default class LIveChat extends React.Component {
           closable={false}
           onClose={this.onClose}
           visible={this.state.visible}
-          width={500}
+          width={width * 0.7}
           height={height}
           bodyStyle={{
               margin:0,

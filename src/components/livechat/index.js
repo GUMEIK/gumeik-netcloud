@@ -42,7 +42,7 @@ export default class LIveChat extends React.Component {
               padding:0
           }}
         >
-          <ChatCom/>
+          <ChatCom width={width*0.7} />
         </Drawer>
       </div>
     );

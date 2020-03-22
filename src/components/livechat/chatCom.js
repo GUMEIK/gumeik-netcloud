@@ -62,6 +62,7 @@ class MessageList extends React.Component{
                 userName:"1",
                 mes:msg
             });
+            this.setState({})
             e.target.value = '';
         }
     }
@@ -69,9 +70,12 @@ class MessageList extends React.Component{
     render(){
         return (
             <div className="wrapperMessageList">
-            <div className="centerMessageList" ref="center">         
+            <div 
+            style={{width:this.props.width}}
+            className="centerMessageList" ref="center">         
             </div>
-            <div className="bottomMessageList">
+            <div className="bottomMessageList"
+             style={{width:this.props.width}}>
                 <i className="iconfont iconyuyin"></i>
                 <input type="text" id="message" ref="input" onKeyDown={this.handleKeyDown} />
                 <i className="iconfont iconbiaoqing"></i>

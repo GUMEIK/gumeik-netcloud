@@ -9,8 +9,9 @@ import {getFileInfo,deleteFIle} from '../../store/action/fileinfo'
 import {store} from '../../store/store'
 import {baseurl} from '../../api/baseurl'
 import {createPdfchangeurlAction} from '../../store/action/pdfviewer'
+import {createVideoUrlSourceAction} from '../../store/action/videoplayer'
+import {createPictureUrlSourceAction} from '../../store/action/picture'
 const { confirm } = Modal;
-
 function showConfirm(key,path) {
   // console.log(curkey)
   confirm({
@@ -141,9 +142,18 @@ class FileList extends Component {
                     console.log(pathstr[index])
                     let path = pathstr.substring(index);
                     store.dispatch(createPdfchangeurlAction(path));
+                  }else if(record.tags === "mp4"){
+                    const videourl = `${baseurl}/preview?path=${record.path}`
+                    store.dispatch(createVideoUrlSourceAction(videourl));
+                  }else if(record.tags === "png" || record.tags === "jpeg" || record.tags === "jpg" || record.tags==="gig"){
+                    const pictureUrl = `${baseurl}/preview?path=${record.path}`
+                    store.dispatch(createPictureUrlSourceAction(pictureUrl));
+
                   }
                 }, // 点击行
-                onClick: event => {},
+                onClick: event => {
+
+                },
                 onContextMenu: event => {},
                 onMouseEnter: event => {}, // 鼠标移入行
                 onMouseLeave: event => {},

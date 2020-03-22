@@ -37,7 +37,7 @@ export default class UploadCom extends Component {
             </p>
             <p className="ant-upload-text">点击上传或将文件拖放到该区域上传</p>
             <p className="ant-upload-hint">
-              双击可预览该行的文件，目前仅支持<strong> PDF</strong> 格式的文档预览
+              双击可预览该行的文件，目前支持<strong> paf/mp4,avi/png,jpeg,jpg,gif</strong> 格式的文档预览
             </p>
           </Dragger>
         )

@@ -1,10 +1,9 @@
 import { Table, Tag } from 'antd';
 import React, { Component } from 'react'
 import "antd/dist/antd.css"
-import { Modal, Button , Spin} from 'antd';
+import { Modal, Spin} from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import {connect} from 'react-redux'
-import { fileDataType } from '../../store/action/fileinfo';
 import {getFileInfo,deleteFIle} from '../../store/action/fileinfo'
 import {store} from '../../store/store'
 import {baseurl} from '../../api/baseurl'
@@ -13,7 +12,6 @@ import {createVideoUrlSourceAction} from '../../store/action/videoplayer'
 import {createPictureUrlSourceAction} from '../../store/action/picture'
 const { confirm } = Modal;
 function showConfirm(key,path) {
-  // console.log(curkey)
   confirm({
     title: '你确定你想要删除这个文件吗?',
     icon: <ExclamationCircleOutlined />,
@@ -26,7 +24,6 @@ function showConfirm(key,path) {
 }
 
 function download(path,filename){
-  console.log("我要下载咯")
   fetch(`${baseurl}/download?path=${path}`).then(res=>res.blob()).then(blob=>{
     if (window.navigator.msSaveOrOpenBlob) {
         navigator.msSaveBlob(blob, filename);  //兼容ie10
@@ -92,8 +89,6 @@ const columns = [
           }}
           >删除</a>
           <a onClick={()=>{
-            console.log("下载")
-            console.log(record.path)
             download(record.path,record.filename);
           }}>下载</a>
         </span>
@@ -118,11 +113,10 @@ class FileList extends Component {
     isLoading:true
   }
   componentDidMount(){
-    console.log("000")
     this.props.getFileInfo();
-   this.setState({
-     isLoading:false
-   })
+    this.setState({
+      isLoading:false
+    })
   }
     render() {
         return (
@@ -130,17 +124,19 @@ class FileList extends Component {
           spinning={this.state.isLoading}
           >
             <Table columns={columns} 
+            style={{
+              marginTop:20
+            }}
             dataSource={this.props.fileinfo} 
             onRow={record => {
               return {
                 onDoubleClick: event => {
-                  console.log(record)
                   if(record.tags==="pdf"){
-                    console.log(record.path)
                     const pathstr = record.path;
                     const index = pathstr.lastIndexOf("/");
                     console.log(pathstr[index])
                     let path = pathstr.substring(index);
+                    console.log(path)
                     store.dispatch(createPdfchangeurlAction(path));
                   }else if(record.tags === "mp4"){
                     const videourl = `${baseurl}/preview?path=${record.path}`

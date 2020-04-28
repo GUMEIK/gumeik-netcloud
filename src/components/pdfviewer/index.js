@@ -33,6 +33,7 @@ class ModalCom extends React.Component {
     const height = document.documentElement.clientHeight;
     const baseurlDev = `${baseurl}/web/viewer.html?file=../file`
     // /home/gumeik/桌面/uploadAndDowload/public/file/edu.pdf
+    console.log(`${baseurlDev}${this.props.pdfurl}222`)
     console.log(this.props.pdfurl)
     return (
       <div>
